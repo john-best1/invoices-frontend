@@ -9,28 +9,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { TokenComponent } from './token/token.component';
-import { TestOptionsComponent } from './test-options/test-options.component';
+
 import { StaffInvoiceListComponent } from './staff-invoice-list/staff-invoice-list.component';
 import { CustomerInvoiceViewComponent } from './customer-invoice-view/customer-invoice-view.component';
 import { StaffInvoiceViewComponent } from './staff-invoice-view/staff-invoice-view.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { InvoiceService } from './invoice.service'
+
 const routes: Routes = [
-  { path: 'token', component: TokenComponent},
-  { path: 'test', component: TestOptionsComponent},
   { path: 'invoices', component: StaffInvoiceListComponent},
   { path: 'customerInvoice', component: CustomerInvoiceViewComponent},
   { path: 'saveInvoice', component: StaffInvoiceViewComponent},
-  { path: '', redirectTo: 'token', pathMatch: 'full'},
+  { path: '', redirectTo: 'invoices', pathMatch: 'full'},
   { path: '**', component: NotFoundComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    TokenComponent,
-    TestOptionsComponent,
     StaffInvoiceListComponent,
     CustomerInvoiceViewComponent,
     StaffInvoiceViewComponent,
@@ -54,7 +51,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [InvoiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
