@@ -19,8 +19,8 @@ import { InvoiceService } from './invoice.service'
 
 const routes: Routes = [
   { path: 'invoices', component: StaffInvoiceListComponent},
-  { path: 'customerInvoice', component: CustomerInvoiceViewComponent},
-  { path: 'saveInvoice', component: StaffInvoiceViewComponent},
+  { path: 'customerInvoices/:id', component: CustomerInvoiceViewComponent},
+  { path: 'saveInvoice/:id', component: StaffInvoiceViewComponent},
   { path: '', redirectTo: 'invoices', pathMatch: 'full'},
   { path: '**', component: NotFoundComponent}
 ]

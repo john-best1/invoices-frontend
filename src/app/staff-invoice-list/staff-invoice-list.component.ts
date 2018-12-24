@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material';
 import { Invoice } from '../invoice.model'
 
 @Component({
-  selector: 'app-staff-invoice-list',
+  selector: 'staff-invoice-list',
   templateUrl: './staff-invoice-list.component.html',
   styleUrls: ['./staff-invoice-list.component.css']
 })

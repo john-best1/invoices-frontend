@@ -14,4 +14,9 @@ uri = 'http://localhost:4000'
   getInvoices(){
     return this.http.get(`${this.uri}/invoices`)
   }
+
+  
+  getInvoiceById(id){
+    return this.http.get(`${this.uri}/invoices/${id}`)
+  }
 }
