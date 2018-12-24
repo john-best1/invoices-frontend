@@ -1,0 +1,60 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+table{
+    width: 100%
+}
+h3{
+    display:inline
+}
+address{
+    padding: 0px;
+}
+h1{
+    text-align: right;
+}
+
+th{
+    text-align: center
+}
+.items-th {
+text-align: left;
+padding-bottom: 25px;
+border: none;
+}
+
+.items-td{
+    padding-bottom: 10px;
+    border: none;
+}
+table.order-info{
+    width: 30%;
+    margin-right: 0px;
+    margin-left: auto
+}
+.items{
+    margin-top: 100px
+}
+.table-items{
+    position: relative;
+    width : 100%;
+    margin-top: 175px
+}
+.order-total{
+    position: relative;
+    width : 100%;
+}
+.addresses{
+    position: fixed;
+    top: 50px;
+    width: 100%;
+}
+.total{
+    text-align: right;
+    margin-right: 60px;
+    margin-left: auto
+}
+
+

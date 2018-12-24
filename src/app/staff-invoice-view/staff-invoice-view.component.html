@@ -1,3 +1,53 @@
-<p>
-  staff-invoice-view works!
-</p>
+<div style="width:50%">
+  <h1>Invoice</h1>
+    <table class="order-info">
+      <tr style="background-color: grey">
+        <th>Order #</th>
+        <th>Date</th>
+      </tr>
+      <tr>
+        <td style="text-align: center">{{ invoice.transactionId }}</td>
+        <td style="text-align: center">{{ invoice.transactionDate }}</td>
+      </tr>
+    </table>
+  <div class="addresses">
+  <h3>Thamco</h3>
+  <address>[Name]<br>
+    [City, Street,Zip]<br>
+    Phone 01923722345</address><br><br>
+  <h3>Bill To</h3>
+  <address>
+      {{invoice.customerName}}<br>
+      {{invoice.customerStreetAddress}}<br>
+      {{invoice.city}}<br>
+      {{invoice.countyOrState}}<br>
+      {{invoice.postCode}}<br>
+      {{invoice.phone}}<br>
+      {{invoice.email}}<br>
+    </address>
+  </div>
+<br><br><br>
+<div class="items">
+  <table class="table-items">
+      <tr>
+        <th class="items-th">Item #</th>
+        <th class="items-th">Item Desc.</th> 
+        <th class="items-th">Price</th>
+        <th class="items-th">Quantity</th>
+        <th class="items-th">Total</th>
+      </tr>
+      <tr *ngFor="let order of orders">
+        <td class="items-td">{{order.itemId}}</td>
+        <td class="items-td">{{order.description}}</td>
+        <td class="items-td">{{order.price.toFixed(2)}}</td>
+        <td class="items-td">{{order.quantity}}</td>
+        <td class="items-td">{{calculateCost(order.price, order.quantity)}}</td>
+      </tr>
+    </table>
+    <table class="order-total">
+      <td class="total">{{calculateTotal()}}</td>
+    </table>
+  </div> <br><br><br>
+  <button mat-raised-button color="primary" routerLink="/invoices">Back</button>
+  <button mat-raised-button color="primary" style="float: right" (click)="saveInvoice(id)">Save</button>
+</div>

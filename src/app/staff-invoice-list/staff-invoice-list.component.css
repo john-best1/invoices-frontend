@@ -1,0 +1,14 @@
+
+
+table{
+    width: 100%;
+}
+
+.mat-column-right{
+    text-align: center;
+}
+
+button{
+    background-color: green;
+    color: white
+}

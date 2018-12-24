@@ -3,6 +3,7 @@ import { InvoiceService } from '../invoice.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { Invoice } from '../invoice.model'
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'staff-invoice-list',
@@ -12,7 +13,7 @@ import { Invoice } from '../invoice.model'
 export class StaffInvoiceListComponent implements OnInit {
 
   invoices: Invoice[]
-  displayedColumns = ['title', 'responsible', 'severity', 'status', 'actions']
+  displayedColumns = ['transactionId', 'customerId', 'customerName', 'date', 'send']
 
   constructor(private invoiceService: InvoiceService, private router: Router) { }
 
@@ -28,5 +29,9 @@ export class StaffInvoiceListComponent implements OnInit {
         console.log("Data requested...")
         console.log(this.invoices)
       })
+  }
+
+  sendInvoice(id){
+      this.router.navigate([`/saveInvoice/${id}`])
   }
 }
