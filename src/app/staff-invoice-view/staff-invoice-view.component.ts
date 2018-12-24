@@ -48,9 +48,9 @@ export class StaffInvoiceViewComponent implements OnInit {
   }
 
   saveInvoice(){
-    this.invoiceService.saveInvoice(this.id)
-    this.wait(2000)
-    this.router.navigate(['/invoices'])
+    this.invoiceService.saveInvoice(this.id).subscribe(() =>{
+      this.router.navigate(['/invoices'])
+    })
   }
 
  }

@@ -21,6 +21,6 @@ uri = 'http://localhost:4000'
   }
 
   saveInvoice(id){
-    this.http.get(`${this.uri}/invoices/update/${id}`)
+    return this.http.post(`${this.uri}/invoices/update/${id}`, {})
   }
 }
