@@ -26,11 +26,20 @@ export class StaffInvoiceListComponent implements OnInit {
       .getInvoices()
       .subscribe((data: Invoice[]) => {
         this.invoices = data
-        console.log("Data requested...")
-        console.log(this.invoices)
       })
   }
 
+  fetchInvoicesWithFilter(filter){
+    this.invoiceService
+      .getInvoicesWithFilter(filter)
+      .subscribe((data: Invoice[]) => {
+        this.invoices = data
+      })
+  }
+
+  formatDate(date){
+    return date.toString().substring(3,15)
+  }
   sendInvoice(id){
       this.router.navigate([`/saveInvoice/${id}`])
   }

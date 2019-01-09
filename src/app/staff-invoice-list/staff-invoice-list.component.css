@@ -12,3 +12,8 @@ button{
     background-color: green;
     color: white
 }
+
+.center-heading{
+    margin: 0 auto;
+    width: 550px;
+}

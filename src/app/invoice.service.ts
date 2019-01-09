@@ -15,6 +15,10 @@ uri = 'http://localhost:4000'
     return this.http.get(`${this.uri}/invoices/invoicesAdmin`)
   }
 
+  getInvoicesWithFilter(filter){
+    return this.http.get(`${this.uri}/invoices/invoicesAdmin/${filter}`)
+  }
+
   
   getInvoiceById(id){
     return this.http.get(`${this.uri}/invoices/${id}`)

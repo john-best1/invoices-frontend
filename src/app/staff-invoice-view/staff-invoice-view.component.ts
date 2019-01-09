@@ -2,6 +2,7 @@ import { Invoice } from './../invoice.model';
 import { InvoiceService } from './../invoice.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material'
 import { TestBed } from '@angular/core/testing';
 
 @Component({
@@ -15,7 +16,8 @@ export class StaffInvoiceViewComponent implements OnInit {
   id: String
   orders: any[]
 
-  constructor(private invoiceService: InvoiceService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private invoiceService: InvoiceService, private router: Router, private route: ActivatedRoute,
+                private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -47,8 +49,15 @@ export class StaffInvoiceViewComponent implements OnInit {
    }
   }
 
-  saveInvoice(){
+  formatDate(date){
+    return date.toString().substring(3,15)
+  }
+
+  saveInvoice(){ 
     this.invoiceService.saveInvoice(this.id).subscribe(() =>{
+      this.snackBar.open('Invoice Confirmed successfully', 'OK', {
+        duration: 3000
+      })
       this.router.navigate(['/invoices'])
     })
   }
