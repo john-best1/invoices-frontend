@@ -72,12 +72,15 @@ export class StaffInvoiceViewComponent implements OnInit {
 
   //TODO issue with this, invoice still displays in list on home page after being sent until home page refreshed, Fix this
   saveInvoice(){ 
-    this.invoiceService.saveInvoice(this.id, this.token).subscribe(() =>{
-      this.snackBar.open('Invoice Confirmed successfully', 'OK', {
-        duration: 30000
+    
+    if(confirm("Are you sure you wish to confirm and send this invoice")){
+      this.invoiceService.saveInvoice(this.id, this.token).subscribe(() =>{
+        this.snackBar.open('Invoice Confirmed successfully', 'OK', {
+          duration: 30000
+        })
+        this.router.navigate(['/invoices'], {queryParams: {token: this.token}})
       })
-      this.router.navigate(['/invoices'], {queryParams: {token: this.token}})
-    })
+    }
   }
 
   back(){

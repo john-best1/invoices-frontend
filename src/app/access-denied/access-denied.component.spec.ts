@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StaffInvoiceListComponent } from './staff-invoice-list.component';
+import { AccessDeniedComponent } from './access-denied.component';
 
-describe('StaffInvoiceListComponent', () => {
-  let component: StaffInvoiceListComponent;
-  let fixture: ComponentFixture<StaffInvoiceListComponent>;
+describe('AccessDeniedComponent', () => {
+  let component: AccessDeniedComponent;
+  let fixture: ComponentFixture<AccessDeniedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaffInvoiceListComponent ]
+      declarations: [ AccessDeniedComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StaffInvoiceListComponent);
+    fixture = TestBed.createComponent(AccessDeniedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
