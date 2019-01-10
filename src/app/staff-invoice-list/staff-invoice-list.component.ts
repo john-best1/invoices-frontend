@@ -36,6 +36,7 @@ export class StaffInvoiceListComponent implements OnInit {
     this.fetchInvoices()
   }
 
+  // get max 25 most recent invoices
   fetchInvoices(){
     this.invoiceService
       .getInvoices(this.token)
@@ -44,6 +45,7 @@ export class StaffInvoiceListComponent implements OnInit {
       })
   }
 
+  // get max 25 most recent invoices with filter on transaction ID, customer Id and customer name
   fetchInvoicesWithFilter(filter){
     this.invoiceService
       .getInvoicesWithFilter(filter, this.token)
@@ -52,13 +54,17 @@ export class StaffInvoiceListComponent implements OnInit {
       })
   }
 
+  // format date to JUN 01 2018 format
   formatDate(date){
     return date.toString().substring(3,15)
   }
+
+  // goes to the send invoice page for the selected invoice
   sendInvoice(id){
     this.router.navigate([`/saveInvoice/${id}`], {queryParams: {token : this.token}})
   }
 
+  // convert invoice to JSON object
   getDecodedAccessToken(token: string): any {
     try{
         return jwt_decode(token);

@@ -36,6 +36,7 @@ export class StaffInvoiceViewComponent implements OnInit {
           }
         }
       })
+    // get the invoice
     this.route.params.subscribe(params => {
       this.id = params.id
       this.invoiceService.getInvoiceById(this.id, this.token).subscribe((data: Invoice) => {
@@ -45,6 +46,8 @@ export class StaffInvoiceViewComponent implements OnInit {
   })
 
 }
+
+// total bill calculation to string
   calculateTotal(){
     var total = 0
     for(var i = 0; i < this.invoice.orders.length; i++){
@@ -53,6 +56,7 @@ export class StaffInvoiceViewComponent implements OnInit {
     return "Total : £" + total.toFixed(2)
   }
 
+  // simple calculation to string
   calculateCost(price, quantity){
     var total = (+price * +quantity).toFixed(2)
     return total
@@ -66,13 +70,14 @@ export class StaffInvoiceViewComponent implements OnInit {
    }
   }
 
+  // format date to JUN 01 2018 format
   formatDate(date){
     return date.toString().substring(3,15)
   }
 
   //TODO issue with this, invoice still displays in list on home page after being sent until home page refreshed, Fix this
+  // This might be fixed, check again
   saveInvoice(){ 
-    
     if(confirm("Are you sure you wish to confirm and send this invoice")){
       this.invoiceService.saveInvoice(this.id, this.token).subscribe(() =>{
         this.snackBar.open('Invoice Confirmed successfully', 'OK', {
@@ -83,9 +88,12 @@ export class StaffInvoiceViewComponent implements OnInit {
     }
   }
 
+  // back button
   back(){
     this.router.navigate(['/invoices'], {queryParams: {token : this.token}})
   }
+
+  //turn web token into json
   getDecodedAccessToken(token: string): any {
     try{
         return jwt_decode(token);

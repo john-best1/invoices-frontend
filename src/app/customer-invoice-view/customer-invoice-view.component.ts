@@ -29,27 +29,28 @@ export class CustomerInvoiceViewComponent implements OnInit {
         }
         else{
           this.token = params['token']
-          let adminBool = this.getDecodedAccessToken(this.token).admin
-          if(!adminBool){
-            this.router.navigate([`access-denied`])
-          }
+          //this.customerId = this.getDecodedAccessToken(this.token).customerId
         }
       })
+    // get the invoice
     this.route.params.subscribe(params => {
       this.id = params.id
       this.invoiceService.getInvoiceById(this.id, this.token).subscribe((data: Invoice) => {
         this.invoice = data
         this.orders = data.orders
+        //this.invoiceCustomerId = data.customerId
       })
   })
+  //
   //  TODO fix this to kick user to access denied if not their invoice
   //  Note think this is a timing issue to do with subscribe
+  //  
   //  if (this.invoiceCustomerId != this.customerId){
   //    this.router.navigate([`access-denied`])
   //  }
   }
 
-  
+// get total bill as string
 calculateTotal(){
   var total = 0
   for(var i = 0; i < this.invoice.orders.length; i++){
@@ -58,15 +59,18 @@ calculateTotal(){
   return "Total : £" + total.toFixed(2)
 }
 
+// simple calculation as string
 calculateCost(price, quantity){
   var total = (+price * +quantity).toFixed(2)
   return total
 }
 
+// format date to JUN 01 2018 format
 formatDate(date){
   return date.toString().substring(3,15)
 }
 
+ // convert invoice to JSON object
 getDecodedAccessToken(token: string): any {
   try{
       return jwt_decode(token);
