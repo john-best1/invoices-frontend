@@ -2,6 +2,7 @@ import { Invoice } from './../invoice.model';
 import { InvoiceService } from './../invoice.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'customer-invoice-view',
@@ -13,18 +14,42 @@ export class CustomerInvoiceViewComponent implements OnInit {
   invoice: Invoice
   id: String
   orders: any[]
+  token: string
+  customerId
+  invoiceCustomerId
 
   constructor(private invoiceService: InvoiceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+      // throw out unverified users (use verified web token as parameter called token in url)
+      this.route.queryParams.subscribe((params)=>{
+        if(!params['token']){
+          console.log("Got here too")
+          this.router.navigate([`access-denied`])
+        }
+        else{
+          this.token = params['token']
+          let adminBool = this.getDecodedAccessToken(this.token).admin
+          if(!adminBool){
+            this.router.navigate([`access-denied`])
+          }
+        }
+      })
     this.route.params.subscribe(params => {
       this.id = params.id
-      this.invoiceService.getInvoiceById(this.id).subscribe((data: Invoice) => {
+      this.invoiceService.getInvoiceById(this.id, this.token).subscribe((data: Invoice) => {
         this.invoice = data
         this.orders = data.orders
       })
   })
-}
+  //  TODO fix this to kick user to access denied if not their invoice
+  //  Note think this is a timing issue to do with subscribe
+  //  if (this.invoiceCustomerId != this.customerId){
+  //    this.router.navigate([`access-denied`])
+  //  }
+  }
+
+  
 calculateTotal(){
   var total = 0
   for(var i = 0; i < this.invoice.orders.length; i++){
@@ -36,6 +61,19 @@ calculateTotal(){
 calculateCost(price, quantity){
   var total = (+price * +quantity).toFixed(2)
   return total
+}
+
+formatDate(date){
+  return date.toString().substring(3,15)
+}
+
+getDecodedAccessToken(token: string): any {
+  try{
+      return jwt_decode(token);
+  }
+  catch(Error){
+      return null;
+  }
 }
 }
 

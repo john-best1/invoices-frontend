@@ -11,20 +11,20 @@ uri = 'http://localhost:4000'
 
   constructor(private http: HttpClient) { }
 
-  getInvoices(){
-    return this.http.get(`${this.uri}/invoices/invoicesAdmin`)
+  getInvoices(token){
+    return this.http.get(`${this.uri}/invoices/invoicesAdmin/?token=${token}`)
   }
 
-  getInvoicesWithFilter(filter){
-    return this.http.get(`${this.uri}/invoices/invoicesAdmin/${filter}`)
+  getInvoicesWithFilter(filter, token){
+    return this.http.get(`${this.uri}/invoices/invoicesAdmin/${filter}?token=${token}`)
   }
 
   
-  getInvoiceById(id){
-    return this.http.get(`${this.uri}/invoices/${id}`)
+  getInvoiceById(id, token){
+    return this.http.get(`${this.uri}/invoices/${id}?token=${token}`)
   }
 
-  saveInvoice(id){
-    return this.http.post(`${this.uri}/invoices/update/${id}`, {})
+  saveInvoice(id, token){
+    return this.http.post(`${this.uri}/invoices/update/${id}?token=${token}`, {})
   }
 }

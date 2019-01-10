@@ -48,6 +48,6 @@
       <td class="total">{{calculateTotal()}}</td>
     </table>
   </div> <br><br><br>
-  <button mat-raised-button color="primary" routerLink="/invoices">Back</button>
+  <button mat-raised-button color="primary" (click)="back()">Back</button>
   <button mat-raised-button color="primary" style="float: right" (click)="saveInvoice()">Save</button>
 </div>

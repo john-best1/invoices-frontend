@@ -16,13 +16,14 @@ import { CustomerInvoiceViewComponent } from './customer-invoice-view/customer-i
 import { StaffInvoiceViewComponent } from './staff-invoice-view/staff-invoice-view.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-import { InvoiceService } from './invoice.service'
+import { InvoiceService } from './invoice.service';
+import { AccessDeniedComponent } from './access-denied/access-denied.component'
 
 const routes: Routes = [
   { path: 'invoices', component: StaffInvoiceListComponent},
   { path: 'customerInvoices/:id', component: CustomerInvoiceViewComponent},
   { path: 'saveInvoice/:id', component: StaffInvoiceViewComponent},
-  { path: '', redirectTo: 'invoices', pathMatch: 'full'},
+  { path: 'access-denied', component: AccessDeniedComponent},
   { path: '**', component: NotFoundComponent}
 ]
 
@@ -32,7 +33,8 @@ const routes: Routes = [
     StaffInvoiceListComponent,
     CustomerInvoiceViewComponent,
     StaffInvoiceViewComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,
