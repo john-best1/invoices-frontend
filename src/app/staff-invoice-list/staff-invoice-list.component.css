@@ -17,3 +17,13 @@ button{
     margin: 0 auto;
     width: 550px;
 }
+
+.search-box{
+    position:relative;
+    left:150px
+}
+
+.search-button{
+    position:relative;
+    left: 150px
+}

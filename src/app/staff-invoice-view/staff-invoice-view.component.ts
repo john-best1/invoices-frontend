@@ -70,6 +70,7 @@ export class StaffInvoiceViewComponent implements OnInit {
     return date.toString().substring(3,15)
   }
 
+  //TODO issue with this, invoice still displays in list on home page after being sent until home page refreshed, Fix this
   saveInvoice(){ 
     this.invoiceService.saveInvoice(this.id, this.token).subscribe(() =>{
       this.snackBar.open('Invoice Confirmed successfully', 'OK', {
