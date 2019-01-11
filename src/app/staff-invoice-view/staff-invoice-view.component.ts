@@ -25,25 +25,32 @@ export class StaffInvoiceViewComponent implements OnInit {
       // throw out unverified users (use verified web token as parameter called token in url)
       this.route.queryParams.subscribe((params)=>{
         if(!params['token']){
-          console.log("Got here too")
           this.router.navigate([`access-denied`])
         }
         else{
           this.token = params['token']
+          if(this.getDecodedAccessToken(this.token) == null){
+            this.router.navigate([`access-denied`])
+          }
+          else{
           let adminBool = this.getDecodedAccessToken(this.token).admin
           if(!adminBool){
             this.router.navigate([`access-denied`])
           }
+          else{
+          // get the invoice
+          this.route.params.subscribe(params => {
+            this.id = params.id
+            this.invoiceService.getInvoiceById(this.id, this.token).subscribe((data: Invoice) => {
+              this.invoice = data
+              this.orders = data.orders
+            })
+          })
+          }
         }
+      }
       })
-    // get the invoice
-    this.route.params.subscribe(params => {
-      this.id = params.id
-      this.invoiceService.getInvoiceById(this.id, this.token).subscribe((data: Invoice) => {
-        this.invoice = data
-        this.orders = data.orders
-      })
-  })
+
 
 }
 
