@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+var env = process.env.NODE_ENV || 'dev'
 
 
 @Injectable({
@@ -7,9 +8,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InvoiceService {
 
-uri = 'http://localhost:4000'
+uri
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    if(env == 'production'){this.uri = 'http://localhost:4001'}
+    else{this.uri = 'http://localhost:4000'}
+  }
+
 
   // get all uncompleted invoices
   getInvoices(token){

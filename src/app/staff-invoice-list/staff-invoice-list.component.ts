@@ -22,18 +22,21 @@ export class StaffInvoiceListComponent implements OnInit {
   ngOnInit() {
       // throw out unverified users (use verified web token as parameter called token in url)
       this.route.queryParams.subscribe((params)=>{
-        if(!params['token']){
+        this.token = params['token']
+        if(!this.token){
           this.router.navigate([`access-denied`])
         }
         else{
-          this.token = params['token']
-          let adminBool = this.getDecodedAccessToken(this.token).admin
+          if(this.getDecodedAccessToken(this.token) == null){
+            this.router.navigate([`access-denied`])
+          }
+          else{let adminBool = this.getDecodedAccessToken(this.token).admin
           if(!adminBool){
             this.router.navigate([`access-denied`])
           }
-        }
+          this.fetchInvoices()
+        }}
       })
-    this.fetchInvoices()
   }
 
   // get max 25 most recent invoices
