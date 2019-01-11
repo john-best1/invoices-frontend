@@ -35,7 +35,7 @@ export class CustomerInvoiceViewComponent implements OnInit {
     // get the invoice
     this.route.params.subscribe(params => {
       this.id = params.id
-      this.invoiceService.getInvoiceById(this.id, this.token).subscribe((data: Invoice) => {
+      this.invoiceService.getCustomerInvoiceById(this.id, this.token).subscribe((data: Invoice) => {
         this.invoice = data
         this.orders = data.orders
         //this.invoiceCustomerId = data.customerId

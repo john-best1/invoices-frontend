@@ -26,6 +26,11 @@ uri = 'http://localhost:4000'
     return this.http.get(`${this.uri}/invoices/${id}?token=${token}`)
   }
 
+    // get invoice by _id
+    getCustomerInvoiceById(id, token){
+      return this.http.get(`${this.uri}/invoices/customerInvoice/${id}?token=${token}`)
+    }
+
   // update invoice to be completed
   saveInvoice(id, token){
     return this.http.post(`${this.uri}/invoices/update/${id}?token=${token}`, {})
