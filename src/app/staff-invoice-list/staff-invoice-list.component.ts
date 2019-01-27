@@ -22,19 +22,20 @@ export class StaffInvoiceListComponent implements OnInit {
   ngOnInit() {
       // throw out unverified users (use verified web token as parameter called token in url)
       this.route.queryParams.subscribe((params)=>{
-        this.token = params['token']
-        if(!this.token){
+        if(!params['token']){
           this.router.navigate([`access-denied`])
         }
         else{
+          this.token = params['token']
           if(this.getDecodedAccessToken(this.token) == null){
             this.router.navigate([`access-denied`])
           }
-          else{let adminBool = this.getDecodedAccessToken(this.token).admin
+          else{
+            let adminBool = this.getDecodedAccessToken(this.token).admin
           if(!adminBool){
             this.router.navigate([`access-denied`])
           }
-          this.fetchInvoices()
+          else{this.fetchInvoices()}
         }}
       })
   }
