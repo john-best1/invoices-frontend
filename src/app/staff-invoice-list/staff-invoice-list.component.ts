@@ -16,6 +16,7 @@ export class StaffInvoiceListComponent implements OnInit {
   invoices: Invoice[]
   displayedColumns = ['transactionId', 'customerId', 'customerName', 'date', 'send']
   token : string
+  searchBox: String= ""
 
   constructor(private invoiceService: InvoiceService, private router: Router, private route: ActivatedRoute) { }
 
@@ -50,9 +51,9 @@ export class StaffInvoiceListComponent implements OnInit {
   }
 
   // get max 25 most recent invoices with filter on transaction ID, customer Id and customer name
-  fetchInvoicesWithFilter(filter){
+  fetchInvoicesWithFilter(){
     this.invoiceService
-      .getInvoicesWithFilter(filter, this.token)
+      .getInvoicesWithFilter(this.searchBox, this.token)
       .subscribe((data: Invoice[]) => {
         this.invoices = data
       })
