@@ -11,7 +11,7 @@ export class InvoiceService {
 uri
 
   constructor(private http: HttpClient) { 
-    if(env == 'production'){this.uri = 'http://localhost:4001'}
+    if(env == 'production'){this.uri = 'https://invoices-frontend.herokuapp.com'}
     else{this.uri = 'http://localhost:4000'}
   }
 
